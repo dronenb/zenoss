@@ -85,7 +85,8 @@ if [ $curos = "debian" ]; then
 fi
 
 # Download Zenoss DEB and install it
-wget -N http://softlayer-dal.dl.sourceforge.net/project/zenossforubuntu/zenoss-core-425-2108_03c_amd64.deb -P $DOWNDIR/
+wget -N https://sourceforge.net/projects/zenossforubuntu/files/zenoss-core-425-2108_03c_amd64.deb/download -P $DOWNDIR/
+mv $DOWNDIR/download $DOWNDIR/zenoss-core-425-2108_03c_amd64.deb
 if [ $UPGRADE = "no" ]; then
 	dpkg -i $DOWNDIR/zenoss-core-425-2108_03c_amd64.deb
 fi
@@ -149,6 +150,7 @@ fi
 # Rabbit install and config
 wget -N http://www.rabbitmq.com/releases/rabbitmq-server/v3.3.0/rabbitmq-server_3.3.0-1_all.deb -P $DOWNDIR/
 dpkg -i $DOWNDIR/rabbitmq-server_3.3.0-1_all.deb
+apt-get -f install
 chown -R zenoss:zenoss $ZENHOME && echo
 rabbitmqctl add_user zenoss zenoss
 rabbitmqctl add_vhost /zenoss
